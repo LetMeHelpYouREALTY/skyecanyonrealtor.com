@@ -323,10 +323,16 @@ jobs:
                   issues.push(`❌ **${file.filename}**: Missing metadata export (SEO)`);
                 }
                 
-                // Check for proper phone numbers
-                if (content.includes('702-222-1964') || content.includes('7022221964') || 
-                    content.includes('702-500-1955') || content.includes('7025001955')) {
-                  issues.push(`❌ **${file.filename}**: Contains old phone number (should be (702) 500-1942)`);
+                // skyecanyonrealtor.com uses (702) 222-1964 per angles_v2 / live crawl
+                if (
+                  content.includes('500-1942') ||
+                  content.includes('5001942') ||
+                  content.includes('702-500-1955') ||
+                  content.includes('7025001955')
+                ) {
+                  issues.push(
+                    `❌ **${file.filename}**: Wrong phone for skyecanyonrealtor.com (use (702) 222-1964)`
+                  );
                 }
                 
                 // Check for JSON-LD schema
