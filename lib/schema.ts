@@ -6,7 +6,8 @@
  * @see https://developers.google.com/search/docs/appearance/structured-data
  */
 
-import { siteConfig, agentInfo, officeInfo, agentStats } from "./site-config";
+import { siteConfig, agentInfo, officeInfo } from "./site-config";
+import { getSiteUrl } from "./site-url";
 
 // ============================================================================
 // Types
@@ -61,7 +62,9 @@ export interface SeniorCommunityData {
 // Constants
 // ============================================================================
 
-const BASE_URL = siteConfig.url;
+function baseUrl(): string {
+  return getSiteUrl();
+}
 
 // Social media profiles (to be updated with actual URLs)
 export const socialProfiles = {
@@ -84,18 +87,18 @@ export function generateRealEstateAgentSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "RealEstateAgent",
-    "@id": `${BASE_URL}#organization`,
+    "@id": `${baseUrl()}#organization`,
     name: "Dr. Jan Duffy - Berkshire Hathaway HomeServices Nevada Properties",
     alternateName: [
       "HeyBerkshire",
       "BHHS Nevada Properties",
       "Berkshire Hathaway HomeServices",
     ],
-    url: BASE_URL,
-    logo: `${BASE_URL}/images/dr-jan-duffy.jpg`,
-    image: `${BASE_URL}/images/dr-jan-duffy.jpg`,
+    url: baseUrl(),
+    logo: `${baseUrl()}/images/dr-jan-duffy.jpg`,
+    image: `${baseUrl()}/images/dr-jan-duffy.jpg`,
     description: siteConfig.description,
-    telephone: "+1-702-500-1942",
+    telephone: "+1-702-222-1964",
     email: agentInfo.email,
     priceRange: "$385K - $10M+",
     address: {
@@ -159,7 +162,7 @@ export function generateRealEstateAgentSchema() {
     sameAs: Object.values(socialProfiles),
     parentOrganization: {
       "@type": "Organization",
-      "@id": `${BASE_URL}#parent-organization`,
+      "@id": `${baseUrl()}#parent-organization`,
       name: "Berkshire Hathaway HomeServices Nevada Properties",
       url: "https://www.bfrre.com",
       parentOrganization: {
@@ -168,13 +171,6 @@ export function generateRealEstateAgentSchema() {
         url: "https://www.bhhs.com",
         sameAs: "https://en.wikipedia.org/wiki/Berkshire_Hathaway_HomeServices",
       },
-    },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: agentStats.averageRating.toString(),
-      reviewCount: agentStats.reviewCount.toString(),
-      bestRating: "5",
-      worstRating: "1",
     },
     knowsAbout: [
       "Las Vegas real estate",
@@ -198,10 +194,10 @@ export function generateOrganizationSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "@id": `${BASE_URL}#parent-organization`,
+    "@id": `${baseUrl()}#parent-organization`,
     name: "Berkshire Hathaway HomeServices Nevada Properties",
     url: "https://www.bfrre.com",
-    logo: `${BASE_URL}/favicon-32x32.png`,
+    logo: `${baseUrl()}/favicon-32x32.png`,
     parentOrganization: {
       "@type": "Organization",
       name: "Berkshire Hathaway HomeServices",
@@ -229,7 +225,7 @@ export function generateBreadcrumbSchema(items: BreadcrumbItem[]) {
       "@type": "ListItem",
       position: index + 1,
       name: item.name,
-      item: item.url.startsWith("http") ? item.url : `${BASE_URL}${item.url}`,
+      item: item.url.startsWith("http") ? item.url : `${baseUrl()}${item.url}`,
     })),
   };
 }
@@ -241,18 +237,18 @@ export function generateWebSiteSchema() {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "@id": `${BASE_URL}#website`,
+    "@id": `${baseUrl()}#website`,
     name: siteConfig.name,
-    url: BASE_URL,
+    url: baseUrl(),
     description: siteConfig.description,
     publisher: {
-      "@id": `${BASE_URL}#organization`,
+      "@id": `${baseUrl()}#organization`,
     },
     potentialAction: {
       "@type": "SearchAction",
       target: {
         "@type": "EntryPoint",
-        urlTemplate: `${BASE_URL}/listings?q={search_term_string}`,
+        urlTemplate: `${baseUrl()}/listings?q={search_term_string}`,
       },
       "query-input": "required name=search_term_string",
     },
@@ -306,12 +302,8 @@ export function generateReviewSchema(reviews: ReviewItem[]) {
   return {
     "@context": "https://schema.org",
     "@type": "RealEstateAgent",
-    "@id": `${BASE_URL}#organization`,
+    "@id": `${baseUrl()}#organization`,
     name: "Dr. Jan Duffy - Berkshire Hathaway HomeServices Nevada Properties",
-    aggregateRating: generateAggregateRatingSchema(
-      agentStats.averageRating,
-      agentStats.reviewCount
-    ),
     review: reviews.map((review) => ({
       "@type": "Review",
       author: {
@@ -341,7 +333,7 @@ export function generateNeighborhoodSchema(neighborhood: NeighborhoodData) {
   const schema: Record<string, unknown> = {
     "@context": "https://schema.org",
     "@type": "Place",
-    "@id": `${BASE_URL}/neighborhoods/${neighborhood.slug}#place`,
+    "@id": `${baseUrl()}/neighborhoods/${neighborhood.slug}#place`,
     name: `${neighborhood.name}, Las Vegas`,
     description: neighborhood.description,
     address: {
@@ -464,7 +456,7 @@ export function generateRealEstateListingSchema(listing: {
     "@type": "RealEstateListing",
     name: listing.name,
     description: listing.description,
-    url: listing.url.startsWith("http") ? listing.url : `${BASE_URL}${listing.url}`,
+    url: listing.url.startsWith("http") ? listing.url : `${baseUrl()}${listing.url}`,
     offers: {
       "@type": "Offer",
       price: listing.price,
@@ -490,7 +482,7 @@ export function generateRealEstateListingSchema(listing: {
     ...(listing.images &&
       listing.images.length > 0 && {
         image: listing.images.map((img) =>
-          img.startsWith("http") ? img : `${BASE_URL}${img}`
+          img.startsWith("http") ? img : `${baseUrl()}${img}`
         ),
       }),
   };
@@ -514,9 +506,9 @@ export function generateServiceSchema(service: {
     "@type": "Service",
     name: service.name,
     description: service.description,
-    url: service.url.startsWith("http") ? service.url : `${BASE_URL}${service.url}`,
+    url: service.url.startsWith("http") ? service.url : `${baseUrl()}${service.url}`,
     provider: {
-      "@id": `${BASE_URL}#organization`,
+      "@id": `${baseUrl()}#organization`,
     },
     areaServed: service.areaServed || ["Las Vegas", "Henderson", "Summerlin", "North Las Vegas"],
     serviceType: "Real Estate Services",
@@ -536,15 +528,15 @@ export function generateWebPageSchema(page: {
   return {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    "@id": `${page.url.startsWith("http") ? page.url : `${BASE_URL}${page.url}`}#webpage`,
+    "@id": `${page.url.startsWith("http") ? page.url : `${baseUrl()}${page.url}`}#webpage`,
     name: page.name,
     description: page.description,
-    url: page.url.startsWith("http") ? page.url : `${BASE_URL}${page.url}`,
+    url: page.url.startsWith("http") ? page.url : `${baseUrl()}${page.url}`,
     isPartOf: {
-      "@id": `${BASE_URL}#website`,
+      "@id": `${baseUrl()}#website`,
     },
     about: {
-      "@id": `${BASE_URL}#organization`,
+      "@id": `${baseUrl()}#organization`,
     },
     ...(page.datePublished && { datePublished: page.datePublished }),
     ...(page.dateModified && { dateModified: page.dateModified }),

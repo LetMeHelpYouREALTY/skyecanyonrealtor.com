@@ -3,21 +3,35 @@ import { GeistSans } from "geist/font/sans";
 import "./globals.css";
 import { headers } from "next/headers";
 import { getDomainConfig } from "@/lib/domain-config";
+import { getSiteUrl } from "@/lib/site-url";
 import { Analytics } from "@vercel/analytics/react";
 import Script from "next/script";
 import GlobalHeroBanner from "@/components/layout/GlobalHeroBanner";
 
+const HOME_TITLE = "Skye Canyon Real Estate Agent | Dr. Jan Duffy, REALTOR®";
+
 export async function generateMetadata(): Promise<Metadata> {
-  const domain = headers().get("x-domain") || "";
-  const config = getDomainConfig(domain);
+  const headersList = headers();
+  const pathname = headersList.get("x-pathname") || "/";
+  const config = getDomainConfig(headersList.get("x-domain") || "");
+  const siteUrl = getSiteUrl();
+  const canonical =
+    pathname === "/" ? siteUrl : `${siteUrl}${pathname.endsWith("/") ? pathname.slice(0, -1) : pathname}`;
+
   return {
-    title: `${config.neighborhood} | Dr. Jan Duffy, REALTOR® | BHHS Nevada`,
+    metadataBase: new URL(siteUrl),
+    title: {
+      default: HOME_TITLE,
+      template: "%s | Dr. Jan Duffy, REALTOR®",
+    },
     description: config.description,
     keywords: config.keywords,
+    alternates: { canonical },
     openGraph: {
-      title: config.heroHeadline,
+      title: pathname === "/" ? HOME_TITLE : config.heroHeadline,
       description: config.description,
       type: "website",
+      url: canonical,
     },
   };
 }
