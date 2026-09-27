@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Navbar from "@/components/layouts/Navbar";
 import RealScoutListings from "@/components/realscout/RealScoutListings";
 import WhyChooseUs from "@/components/sections/WhyChooseUs";
