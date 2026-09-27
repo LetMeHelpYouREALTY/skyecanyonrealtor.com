@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
 import Navbar from "@/components/layouts/Navbar";
+import { pageMetadata } from "@/lib/page-metadata";
 import RealScoutListings from "@/components/realscout/RealScoutListings";
 import WhyChooseUs from "@/components/sections/WhyChooseUs";
 import ReviewsSection from "@/components/sections/ReviewsSection";
@@ -10,6 +10,13 @@ import { Phone, Home as HomeIcon, TrendingUp, Shield, Users } from "lucide-react
 import { getPageDomainConfig } from "@/lib/get-domain-config";
 import { getFaqsForDomain } from "@/lib/faq-config";
 import { getSiteUrl } from "@/lib/site-url";
+
+export const metadata = pageMetadata({
+  title: "Skye Canyon Real Estate Agent | Dr. Jan Duffy, REALTOR®",
+  description:
+    "Skye Canyon real estate agent Dr. Jan Duffy provides buyer and seller representation in Northwest Las Vegas. Search homes and call (702) 222-1964.",
+  path: "/",
+});
 
 // Maps pageType → human-readable FAQ section title/subtitle
 const FAQ_SECTION_COPY: Record<

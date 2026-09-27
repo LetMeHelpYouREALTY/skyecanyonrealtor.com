@@ -16,6 +16,7 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { FollowUpBossClient } from '@/lib/fub/client';
+import { createFubClientConfig, getFubApiKey } from '@/lib/fub/env';
 import { ClaudeClient } from '@/lib/claude/client';
 import { propertySearchTemplate } from '@/lib/claude/prompt-templates';
 
@@ -74,9 +75,11 @@ export async function POST(request: NextRequest) {
 async function handlePersonCreated(data: any) {
   console.log(`[FUB] New person created: ${data.name || data.id}`);
 
-  const fub = new FollowUpBossClient({
-    apiKey: process.env.FUB_API_KEY || '',
-  });
+  if (!getFubApiKey()) {
+    console.error('[FUB Webhook] Follow Up Boss API key is not configured');
+    return;
+  }
+  const fub = new FollowUpBossClient(createFubClientConfig());
 
   try {
     // Get full person details
@@ -137,9 +140,11 @@ async function handlePersonUpdated(data: any) {
 async function handleStageUpdated(data: any) {
   console.log(`[FUB] Stage updated for ${data.name || data.id}: ${data.stage}`);
 
-  const fub = new FollowUpBossClient({
-    apiKey: process.env.FUB_API_KEY || '',
-  });
+  if (!getFubApiKey()) {
+    console.error('[FUB Webhook] Follow Up Boss API key is not configured');
+    return;
+  }
+  const fub = new FollowUpBossClient(createFubClientConfig());
 
   try {
     // Add stage-specific tags and actions
@@ -184,9 +189,11 @@ async function handleStageUpdated(data: any) {
 async function handleTagsCreated(data: any) {
   console.log(`[FUB] Tags added to ${data.name || data.id}: ${data.tags?.join(', ')}`);
 
-  const fub = new FollowUpBossClient({
-    apiKey: process.env.FUB_API_KEY || '',
-  });
+  if (!getFubApiKey()) {
+    console.error('[FUB Webhook] Follow Up Boss API key is not configured');
+    return;
+  }
+  const fub = new FollowUpBossClient(createFubClientConfig());
 
   // Trigger actions based on specific tags
   for (const tag of data.tags || []) {
@@ -280,9 +287,11 @@ Based on this information, provide a brief lead qualification summary and recomm
  * Check for duplicate leads
  */
 async function checkForDuplicates(personId: number) {
-  const fub = new FollowUpBossClient({
-    apiKey: process.env.FUB_API_KEY || '',
-  });
+  if (!getFubApiKey()) {
+    console.error('[FUB Webhook] Follow Up Boss API key is not configured');
+    return;
+  }
+  const fub = new FollowUpBossClient(createFubClientConfig());
 
   try {
     const person = await fub.getPerson(personId);
@@ -329,9 +338,11 @@ async function checkForDuplicates(personId: number) {
  * Trigger property search
  */
 async function triggerPropertySearch(personId: number, neighborhood?: string) {
-  const fub = new FollowUpBossClient({
-    apiKey: process.env.FUB_API_KEY || '',
-  });
+  if (!getFubApiKey()) {
+    console.error('[FUB Webhook] Follow Up Boss API key is not configured');
+    return;
+  }
+  const fub = new FollowUpBossClient(createFubClientConfig());
 
   try {
     const person = await fub.getPerson(personId);

@@ -11,6 +11,8 @@
 
 import { NextRequest, NextResponse } from 'next/server';
 import { FollowUpBossClient } from '@/lib/fub/client';
+import { createFubClientConfig, getFubApiKey } from '@/lib/fub/env';
+import { SITE_HOST } from '@/lib/site-url';
 import { leadFormLimiter, getClientId, checkRateLimit, getRateLimitHeaders } from '@/lib/rate-limit';
 
 export interface LeadCaptureRequest {
@@ -132,11 +134,15 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Initialize FUB client
-    const fub = new FollowUpBossClient({
-      apiKey: process.env.FUB_API_KEY || '',
-      systemKey: process.env.FUB_SYSTEM_KEY,
-    });
+    if (!getFubApiKey()) {
+      console.error('[Lead Capture] Follow Up Boss API key is not configured');
+      return NextResponse.json(
+        { error: 'Failed to capture lead' },
+        { status: 500 }
+      );
+    }
+
+    const fub = new FollowUpBossClient(createFubClientConfig());
 
     // Check for existing lead (deduplication)
     let existingPerson = null;
@@ -238,10 +244,7 @@ export async function POST(request: NextRequest) {
     console.error('[Lead Capture] Error:', error);
     
     return NextResponse.json(
-      { 
-        error: 'Failed to capture lead',
-        details: error instanceof Error ? error.message : 'Unknown error',
-      },
+      { error: 'Failed to capture lead' },
       { status: 500 }
     );
   }
@@ -267,7 +270,7 @@ function enrichSource(source: string | undefined, request: NextRequest): string 
   if (referrer) {
     try {
       const refUrl = new URL(referrer);
-      if (!refUrl.hostname.includes('heyberkshire.com')) {
+      if (!refUrl.hostname.includes(SITE_HOST)) {
         return `referral/${refUrl.hostname}`;
       }
     } catch (e) {
@@ -275,7 +278,7 @@ function enrichSource(source: string | undefined, request: NextRequest): string 
     }
   }
 
-  return source || 'website/direct';
+  return source || SITE_HOST;
 }
 
 /**

@@ -1,3 +1,5 @@
+import { FUB_SYSTEM_NAME } from "./env";
+
 /**
  * Follow Up Boss API Client - Optimized
  * 
@@ -256,9 +258,9 @@ export class FollowUpBossClient {
     const headers: HeadersInit = {
       'Content-Type': 'application/json',
       'Authorization': `Basic ${Buffer.from(`${this.config.apiKey}:`).toString('base64')}`,
+      'X-System': FUB_SYSTEM_NAME,
     };
 
-    // Add system key for higher rate limits
     if (this.config.systemKey) {
       headers['X-System-Key'] = this.config.systemKey;
     }

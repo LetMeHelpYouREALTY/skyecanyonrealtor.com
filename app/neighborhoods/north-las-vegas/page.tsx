@@ -3,12 +3,12 @@ import Footer from "@/components/layouts/Footer";
 import RealScoutListings from "@/components/realscout/RealScoutListings";
 import Link from "next/link";
 import { Phone, DollarSign, TrendingUp, Home as HomeIcon, Users } from "lucide-react";
-import type { Metadata } from "next";
+import { pageMetadata } from "@/lib/page-metadata";
 
-export const metadata: Metadata = {
-  title: "Berkshire Hathaway HomeServices North Las Vegas | Affordable Homes",
-  description:
-    "Find affordable North Las Vegas homes with Berkshire Hathaway HomeServices Nevada Properties. Dr. Jan Duffy helps first-time buyers and investors. Median price $385K. Call (702) 500-1942.",
+export const metadata = pageMetadata({
+  title: "North Las Vegas | Affordable Homes",
+  description: "Find affordable North Las Vegas homes with Berkshire Hathaway HomeServices Nevada Properties. Dr. Jan Duffy helps first-time buyers and investors. Median price $385K. Call (702) 222-1964.",
+  path: "/neighborhoods/north-las-vegas",
   keywords: [
     "Berkshire Hathaway HomeServices North Las Vegas",
     "North Las Vegas homes for sale",
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     "first time home buyer Las Vegas",
     "new construction North Las Vegas",
   ],
-};
+});
 
 const faqSchema = {
   "@context": "https://schema.org",
@@ -84,7 +84,7 @@ export default function NorthLasVegasPage() {
               Berkshire Hathaway HomeServices Nevada Properties
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6">
-              Berkshire Hathaway HomeServices North Las Vegas
+              North Las Vegas Real Estate
             </h1>
             <p className="text-xl text-slate-600">
               Affordable homeownership and investment opportunities. Find your North Las Vegas
@@ -378,11 +378,11 @@ export default function NorthLasVegasPage() {
               for guidance on finding affordable homes that fit your budget.
             </p>
             <a
-              href="tel:+17025001942"
+              href="tel:+17022221964"
               className="inline-flex items-center bg-white text-blue-600 px-8 py-4 rounded-md font-bold text-lg hover:bg-blue-50 transition-colors"
             >
               <Phone className="h-5 w-5 mr-2" />
-              Call (702) 500-1942
+              Call (702) 222-1964
             </a>
             <p className="mt-4 text-blue-200 text-sm">
               Berkshire Hathaway HomeServices Nevada Properties
