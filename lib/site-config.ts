@@ -1,27 +1,26 @@
-// Site Configuration - HeyBerkshire.com
-// Berkshire Hathaway HomeServices Nevada Properties
+// Site Configuration — skyecanyonrealtor.com
+
+import { getSiteUrl } from "./site-url";
 
 export const siteConfig = {
-  name: "HeyBerkshire",
-  fullName: "Berkshire Hathaway HomeServices Nevada Properties",
-  tagline: "Private Client Real Estate Advisory",
-  /** Full brand line for titles and OG: Berkshire Hathaway HomeServices Nevada Properties | Private Client Real Estate Advisory */
-  brandLine:
-    "Berkshire Hathaway HomeServices Nevada Properties | Private Client Real Estate Advisory",
-  brandName: "Berkshire Hathaway HomeServices",
-  shortName: "BHHS",
-  url: "https://heyberkshire.com",
+  name: "Skye Canyon Realtor",
+  fullName: "Dr. Jan Duffy — Skye Canyon Real Estate Agent",
+  tagline: "Skye Canyon Real Estate Agent",
+  brandLine: "Skye Canyon Real Estate Agent | Dr. Jan Duffy, REALTOR®",
+  brandName: "Dr. Jan Duffy",
+  shortName: "Skye Canyon",
+  url: getSiteUrl(),
   description:
-    "Expert real estate services in Las Vegas and Henderson, NV. Buy, sell, or invest with Dr. Jan Duffy, your trusted Berkshire Hathaway HomeServices Nevada Properties agent.",
+    "Skye Canyon real estate agent Dr. Jan Duffy provides agent-led buyer and seller representation in Northwest Las Vegas. Call (702) 222-1964.",
 };
 
 export const agentInfo = {
   name: "Dr. Jan Duffy",
   title: "REALTOR®",
   license: "S.0197614.LLC",
-  phone: "(702) 500-1942",
-  phoneFormatted: "(702) 500-1942",
-  phoneTel: "tel:+17025001942",
+  phone: "(702) 222-1964",
+  phoneFormatted: "(702) 222-1964",
+  phoneTel: "tel:+17022221964",
   email: "homes@heyberkshire.com",
   brokerage: "Berkshire Hathaway HomeServices Nevada Properties",
 };
@@ -39,8 +38,8 @@ export const officeInfo = {
     lat: 36.1893,
     lng: -115.2821,
   },
-  phone: "(702) 500-1942",
-  phoneTel: "tel:+17025001942",
+  phone: "(702) 222-1964",
+  phoneTel: "tel:+17022221964",
 };
 
 // Market Statistics (Updated January 2026)
@@ -79,13 +78,11 @@ export const marketStats = {
   },
 };
 
-// Agent Stats
+// Agent Stats (no hard-coded review aggregates — see Google Business Profile)
 export const agentStats = {
   servingSince: 2008,
   transactionsClosed: 500,
   volumeClosed: "$127M+",
-  averageRating: 4.9,
-  reviewCount: 200,
 };
 
 // Value Propositions

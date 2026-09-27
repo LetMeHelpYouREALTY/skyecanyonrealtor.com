@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { Phone, Mail, MapPin, Facebook, Instagram, Linkedin } from "lucide-react";
+import { agentInfo } from "@/lib/site-config";
+import { SISTER_LINKS } from "@/lib/sister-links";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -164,6 +166,20 @@ export default function Footer() {
                 </Link>
               </li>
             </ul>
+            <h4 className="font-semibold text-base mt-6 mb-3">Skye Canyon resources</h4>
+            <ul className="space-y-2">
+              {SISTER_LINKS.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className="text-slate-300 hover:text-white transition-colors text-sm"
+                    rel="noopener noreferrer"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* Contact Info - NAP (Name, Address, Phone) */}
@@ -181,10 +197,10 @@ export default function Footer() {
               <li className="flex items-center">
                 <Phone className="h-5 w-5 mr-3 text-blue-400 flex-shrink-0" />
                 <Link
-                  href="tel:+17025001942"
+                  href={agentInfo.phoneTel}
                   className="text-slate-300 hover:text-white transition-colors text-sm"
                 >
-                  (702) 500-1942
+                  {agentInfo.phone}
                 </Link>
               </li>
               <li className="flex items-center">
