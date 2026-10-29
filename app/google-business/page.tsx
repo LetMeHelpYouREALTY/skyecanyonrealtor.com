@@ -28,7 +28,7 @@ import {
 
 export const metadata = pageMetadata({
   title: "Dr. Jan Duffy, REALTOR® Las Vegas",
-  description: "Dr. Jan Duffy is a trusted Las Vegas REALTOR® with Berkshire Hathaway HomeServices Nevada Properties. Specializing in Summerlin, Henderson, 55+ communities, California relocation, and luxury homes. Call (702) 222-1964.",
+  description: "Dr. Jan Duffy is a trusted Las Vegas REALTOR® with Berkshire Hathaway HomeServices Nevada Properties. Specializing in Summerlin, Henderson, 55+ communities, California relocation, and luxury homes. Call (702) 500-1955.",
   path: "/google-business",
   keywords: [
     "Dr. Jan Duffy realtor",
