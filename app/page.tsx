@@ -14,7 +14,7 @@ import { getSiteUrl } from "@/lib/site-url";
 export const metadata = pageMetadata({
   title: "Skye Canyon Real Estate Agent | Dr. Jan Duffy, REALTOR®",
   description:
-    "Skye Canyon real estate agent Dr. Jan Duffy provides buyer and seller representation in Northwest Las Vegas. Search homes and call (702) 222-1964.",
+    "Skye Canyon real estate agent Dr. Jan Duffy provides buyer and seller representation in Northwest Las Vegas. Search homes and call (702) 500-1955.",
   path: "/",
 });
 
@@ -68,7 +68,7 @@ export default async function Home() {
     "@type": "RealEstateAgent",
     name: `Dr. Jan Duffy - ${config.neighborhood} Real Estate`,
     url: getSiteUrl(),
-    telephone: "+17022221964",
+    telephone: "+17025001955",
     address: {
       "@type": "PostalAddress",
       streetAddress: "9406 W Lake Mead Blvd, Suite 100",
@@ -233,11 +233,11 @@ export default async function Home() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
-                href="tel:+17022221964"
+                href="tel:+17025001955"
                 className="inline-flex items-center justify-center bg-white text-blue-600 px-8 py-4 rounded-md font-bold text-lg hover:bg-blue-50 transition-colors"
               >
                 <Phone className="h-5 w-5 mr-2" />
-                Call 702-222-1964
+                Call 702-500-1955
               </a>
               <Link
                 href="/contact"

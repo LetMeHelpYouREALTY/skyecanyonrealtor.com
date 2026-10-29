@@ -15,6 +15,6 @@ export const GLOBAL_HERO: GlobalHeroConfig = {
   src: "/images/global-hero/heyberkshire.jpg",
   alt: "Skye Canyon master-planned community and mountain backdrop, Northwest Las Vegas, NV",
   tagline: "Skye Canyon Real Estate Agent — Dr. Jan Duffy, REALTOR®",
-  phoneDisplay: "(702) 222-1964",
-  phoneTel: "tel:+17022221964",
+  phoneDisplay: "(702) 500-1955",
+  phoneTel: "tel:+17025001955",
 };

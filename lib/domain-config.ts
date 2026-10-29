@@ -27,7 +27,7 @@ export const SINGLE_SITE_CONFIG: DomainConfig = {
   neighborhood: "Skye Canyon",
   tagline: "Skye Canyon Real Estate Agent",
   description:
-    "Skye Canyon real estate agent Dr. Jan Duffy helps buyers and sellers with agent-led representation in Northwest Las Vegas. Call (702) 222-1964.",
+    "Skye Canyon real estate agent Dr. Jan Duffy helps buyers and sellers with agent-led representation in Northwest Las Vegas. Call (702) 500-1955.",
   heroHeadline: "Skye Canyon Real Estate Agent Dr. Jan Duffy",
   heroSubheadline:
     "Agent-led representation for Skye Canyon buyers and sellers. Dr. Jan Duffy, REALTOR®, guides you through listings, new construction, and resale opportunities.",
