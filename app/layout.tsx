@@ -5,6 +5,7 @@ import { getSiteUrl } from "@/lib/site-url";
 import { Analytics } from "@vercel/analytics/react";
 import Script from "next/script";
 import GlobalHeroBanner from "@/components/layout/GlobalHeroBanner";
+import RealtorAnalytics from "../components/analytics/RealtorAnalytics";
 
 const HOME_TITLE = "Skye Canyon Real Estate Agent | Dr. Jan Duffy, REALTOR®";
 
@@ -35,6 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <GlobalHeroBanner />
         {children}
         <Analytics />
+        <RealtorAnalytics siteName="skyecanyonrealtor.com" />
       </body>
     </html>
   );
